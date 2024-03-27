@@ -1,0 +1,11 @@
+This file will answer the following question:
+What are these scripts and for what they are used?
+
+
+- the scripts were made to be used after installing a new linux
+I found a hassle having to type all the same commands and configure
+it by hand everytime I shifted my environment
+
+So these scripts are intended to automatize this work
+Feel free to make modifications for your own use
+or use it as it is.
