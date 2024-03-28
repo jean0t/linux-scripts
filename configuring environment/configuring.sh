@@ -4,7 +4,7 @@
 sudo apt update -y; sudo apt upgrade -y;
 
 sudo apt install chromium telegram-desktop git golang python3 npm node -y
-mkdir $HOME/.scripts $HOME/wallpapers
+mkdir $HOME/.scripts $HOME/wallpapers $HOME/programming/{python,golang,projects}
 echo 'System updated, some apps downloaded with apt and some directories created'
 
 # adding some customizations to .bashrc
