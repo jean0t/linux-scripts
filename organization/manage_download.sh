@@ -23,22 +23,27 @@ fi
 
 organize_files() {
 
-	for file in $(find "$download_dir" -maxdepth 1 -type f); do
+	for file in $(find "$1" -maxdepth 1 -type f); do
 			case "$(file --mime-type -b "$file")" in
 				image/*)
-					mv "$file" "$images_dir/"
+					mv "$file" "$images_dir"
+					echo "$file moved"
 					;;
-				text/*|application/pdf)
-					mv "$file" "$texts_dir/"
+				text/*)
+					mv "$file" "$texts_dir"
+					echo "$file moved"
 					;;
 				audio/*)
-					mv "$file" "$audio_dir/"
+					mv "$file" "$audio_dir"
+					echo "$file moved"
 					;;
 				application/*)
-					mv "$file" "$binaries_dir/"
+					mv "$file" "$binaries_dir"
+					echo "$file moved"
 					;;
 				video/*)
-					mv "$file" "$videos_dir/"
+					mv "$file" "$videos_dir"
+					echo "$file moved"
 					;;
 			esac
 		done
@@ -47,7 +52,9 @@ organize_files() {
 
 count_of_scans=1
 while true; do
+	rename "s/ /_/g" "$download_dir/*.*" # rename every file to avoid conflits with white space
 	organize_files "$download_dir"
+	echo ""
 	echo "Downloads scan number ${count_of_scans} "
 	((count_of_scans++))	
 	sleep 600 # scans the download directory each 10 minutes
