@@ -1,0 +1,12 @@
+#!/bin/bash
+
+FILENAME=$(date '+%Y-%m-%d')-plans.txt
+DIRECTORY=$HOME/diary
+mkdir -p $DIRECTORY
+
+if [[ -a $DIRECTORY/$FILENAME ]]
+then
+	echo -e "\nFile already exists\n"
+else
+	echo -e "O que você pretende fazer hoje?\n*\n*" > $DIRECTORY/$FILENAME
+fi

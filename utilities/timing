@@ -1,0 +1,4 @@
+#!/bin/bash
+
+read -p 'How many mminutes you want to work? ' MINUTES
+sleep $(( MINUTES * 60 )) && notify-send time-out "your period of work ended, take some time to rest"

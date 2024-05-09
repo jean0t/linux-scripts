@@ -1,0 +1,12 @@
+#!/bin/bash
+
+FILENAME=$(date '+%Y-%m-%d').txt
+DIRECTORY=$HOME/diary
+mkdir -p $DIRECTORY
+
+if [[ -a $DIRECTORY/$FILENAME ]]
+then
+	echo -e "\nFile already exists\n"
+else
+	echo -e "O que você fez ontem?\n\nO que você vai fazer hoje?\n\nO que te deixou em pânico ontem?\n\n" > $DIRECTORY/$FILENAME
+fi
