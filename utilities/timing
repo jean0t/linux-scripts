@@ -2,6 +2,6 @@
 
 read -p 'How many minutes you want to work? ' MINUTES
 MESSAGE="your period of work ended, take some time to rest"
-AUDIO='/home/james/Downloads/audio/ara-ara.wav'
+AUDIO='/home/james/Downloads/audio/ara-ara.wav' # in this variable, put the path to some .wav file
 
 sleep $(( MINUTES * 60 )) && notify-send time-out "$MESSAGE" && aplay $AUDIO &> /dev/null
