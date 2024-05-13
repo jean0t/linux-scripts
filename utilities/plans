@@ -1,12 +1,59 @@
 #!/bin/bash
 
-FILENAME=$(date '+%Y-%m-%d')-plans.txt
+DATE=$(date '+%Y-%m-%d')
+FILENAME=$DATE-plans.txt
 DIRECTORY=$HOME/diary
+ALL_PATH=$DIRECTORY/$FILENAME
+
 mkdir -p $DIRECTORY
 
-if [[ -a $DIRECTORY/$FILENAME ]]
+if [[ ! -a $ALL_PATH ]]
 then
-	echo -e "\nFile already exists\n"
+	touch $ALL_PATH; echo "To do list - $DATE" >> $ALL_PATH
 else
-	echo -e "O que você pretende fazer hoje?\n*\n*" > $DIRECTORY/$FILENAME
+	touch $ALL_PATH
 fi
+
+add () {
+	if [[ -z "$1" ]]
+	then
+		echo "Empty string will not be added"
+	else
+		CODE=$( echo -n "$*" | md5sum | cut -c 1-4 )
+		echo "$CODE - $*" >> $ALL_PATH
+	fi
+}
+
+delete () {	
+	sed -i "/^$1/d" $ALL_PATH
+}
+
+see () {
+	echo -e "\n-----------------------------\n"
+	cat $ALL_PATH
+	echo -e "\n-----------------------------\n"
+}
+
+completed () {
+	sed -i "s/$1/done/" $ALL_PATH
+}
+
+PS3="Select your option: "
+
+options=("add" "delete" "see" "complete" "exit")
+
+select option in "${options[@]}"
+do
+	case $REPLY in
+		1) read -p "Say your task: " TASK
+			add $TASK ;;
+		2) read -p "Id of the task: " ID
+			delete $ID ;;
+		3) see ;;
+		4) read -p "Id of the task: " ID
+			completed $ID ;;
+		*) exit ;;
+	esac
+done
+
+
