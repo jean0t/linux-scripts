@@ -1,7 +1,32 @@
 #!/bin/bash
 
-read -p 'How many minutes you want to work? ' MINUTES
+read -p 'How many minutes you want to work? ' TIME
 MESSAGE="your period of work ended, take some time to rest"
-AUDIO='/home/james/Downloads/audio/ara-ara.wav' # in this variable, put the path to some .wav file
+AUDIO="$HOME/Downloads/audio/ara-ara.wav"
+MINUTES=$(( TIME * 60 ))
 
-sleep $(( MINUTES * 60 )) && notify-send time-out "$MESSAGE" && aplay $AUDIO &> /dev/null
+wait_time () {
+	sleep 1
+}
+
+play_audio () {
+	aplay $AUDIO &> /dev/null
+}
+
+notify_end () {
+	TITLE="Time-ended"
+	MESSAGE="Take some time to rest, your work period ended"
+	notify-send $TITLE $MESSAGE
+}
+
+work_time () {
+	for seconds in $(seq 1 $MINUTES)
+	do
+		wait_time $seconds
+		if [[ $(( seconds%60 )) -eq 0  ]]; then
+			echo "$(( seconds/60 )) passed from $MINUTES"
+		fi
+	done
+}
+
+work_time && notify_end && play_audio
