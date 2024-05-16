@@ -24,7 +24,7 @@ work_time () {
 	do
 		wait_time $seconds
 		if [[ $(( seconds%60 )) -eq 0  ]]; then
-			echo "$(( seconds/60 )) passed from $MINUTES"
+			echo "$(( seconds/60 )) passed from $TIME"
 		fi
 	done
 }
