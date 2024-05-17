@@ -10,13 +10,13 @@ wait_time () {
 }
 
 play_audio () {
-	aplay $AUDIO &> /dev/null
+	aplay "$AUDIO" &> /dev/null
 }
 
 notify_end () {
 	TITLE="Time-ended"
 	MESSAGE="Take some time to rest, your work period ended"
-	notify-send $TITLE $MESSAGE
+	notify-send "$TITLE" "$MESSAGE"
 }
 
 work_time () {
@@ -24,7 +24,7 @@ work_time () {
 	do
 		wait_time $seconds
 		if [[ $(( seconds%60 )) -eq 0  ]]; then
-			echo "$(( seconds/60 )) passed from $TIME"
+			echo -en "$(( seconds/60 )) passed from $TIME\r"
 		fi
 	done
 }
