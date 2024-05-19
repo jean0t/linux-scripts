@@ -1,9 +1,11 @@
 #!/bin/bash
 
-# updating the system and using apt to install some apps
-sudo apt update -y; sudo apt upgrade -y;
+pkgman=apt #put your repository manager here
 
-sudo apt install chromium telegram-desktop git golang python3 npm node -y
+# updating the system and using apt to install some apps
+sudo $pkgman update -y; sudo $pkgman upgrade -y;
+
+sudo $pkgman install chromium telegram-desktop git golang python3 npm node -y
 mkdir $HOME/.scripts $HOME/wallpapers $HOME/programming/{python,golang,projects}
 echo 'System updated, some apps downloaded with apt and some directories created'
 
