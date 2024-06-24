@@ -1,0 +1,46 @@
+#!/usr/bin/python3
+
+from pathlib import Path
+
+home = Path.home()
+downloads = home.joinpath("Downloads")
+
+for archive in downloads.iterdir():
+	if archive.is_file():
+		extension = archive.suffix
+		print(extension)
+
+		match extension:
+			case ".pdf"|".txt"|".md":
+				target_dir = downloads / "texts"
+				archive.rename(target_dir / archive.name)
+				print(f"{archive.name} was moved to {target_dir}")
+
+			case ".deb"|".appimage"|"":
+				target_dir = downloads / "binaries"
+				archive.rename(target_dir / archive.name)
+				print(f"{archive.name} was moved to {target_dir}")
+
+			case ".mp4"|".wav":
+				target_dir = downloads / "videos"
+				archive.rename(target_dir / archive.name)
+				print(f"{archive.name} was moved to {target_dir}")
+
+			case ".mp3":
+				target_dir = downloads / "audio"
+				archive.rename(target_dir / archive.name)
+				print(f"{archive.name} was moved to {target_dir}")
+
+			case ".jpeg"|".jpg"|".png"|".gif":
+				target_dir = downloads / "images"
+				archive.rename(target_dir / archive.name)
+				print(f"{archive.name} was moved to {target_dir}")
+				
+			case _:
+				target_dir = downloads / "special"
+				archive.rename(target_dir / archive.name)
+				print(f"{archive.name} was moved to {target_dir}")
+
+	else:
+		continue
+
