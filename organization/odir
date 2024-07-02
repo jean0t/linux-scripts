@@ -8,7 +8,6 @@ downloads = home.joinpath("Downloads")
 for archive in downloads.iterdir():
 	if archive.is_file():
 		extension = archive.suffix
-		print(extension)
 
 		match extension:
 			case ".pdf"|".txt"|".md":
