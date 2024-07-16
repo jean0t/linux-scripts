@@ -19,12 +19,15 @@ mkdir $HOME/download_for_packages
 # making a directory to make a standard that doesn't depend
 # in the language of the system
 
-curl -o $HOME/download_for_packages/vscode.deb https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64; sudo dpkg -i vscode.deb;
+curl -o $HOME/download_for_packages/vscodium.deb https://github.com/VSCodium/vscodium/releases/download/1.91.1.24193/codium_1.91.1.24193_amd64.deb; sudo dpkg -i $HOME/download_for_packages/vscodium.deb;
 
-curl -o $HOME/download_for_packages/AtomIDE.deb https://github.com/atom/atom/releases/download/v1.60.0/atom-amd64.deb; sudo dpkg -i AtomIDE.deb;
+curl -o $HOME/download_for_packages/Upscayl.deb https://github.com/upscayl/upscayl/releases/download/v2.11.5/upscayl-2.11.5-linux.deb; sudo dpkg -i $HOME/download_for_packages/Upscayl.deb;
 
-curl -o $HOME/download_for_packages/discord_app.deb https://discord.com/api/download?platform=linux&format=deb; sudo dpkg -i discord_app.deb;
-echo 'visual studio code, discord and Atom installed to the system'
+curl -o $HOME/download_for_packages/discord_app.deb https://discord.com/api/download?platform=linux&format=deb; sudo dpkg -i $HOME/download_for_packages/discord_app.deb;
+
+curl -o $HOME/download_for_packages/obsidian.deb https://github.com/obsidianmd/obsidian-releases/releases/download/v1.6.5/obsidian-1.6.5-amd64.deb; sudo dpkg -i $HOME/download_for_packages/obsidian.deb;
+
+echo 'vscodium, discord, obsidian and upscayl installed to the system'
 
 
 # adding more security to the system through the activation of the firewall
@@ -34,4 +37,3 @@ echo 'firewall activated'
 
 
 echo 'major configurations already made'
-
