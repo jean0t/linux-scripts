@@ -12,6 +12,9 @@
 #		- Downloads and extracts audios
 #		  from youtube videos
 #
+#	1.1:
+#		- Test if there are links
+#		  to download
 #============================================|
 
 #============================================|
@@ -29,6 +32,9 @@
 # test if the directory exists
 [[ ! -e "$HOME/Downloads/Youtube_Download" ]] \
 && { echo 'created directory ~Downloads/Youtube_Download' ; mkdir -p "$HOME/Downloads/Youtube_Download" ; }
+
+# test if there are parameters
+[[ $# -eq 0 ]] && { echo 'you need to pass an youtube link to download' ; exit 1 ; }
 
 #============================================|
 # GLOBAL VARIABLES
