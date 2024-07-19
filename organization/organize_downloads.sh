@@ -15,14 +15,15 @@ special_dir="$download_dir/special"
 
 
 # creates the directories if they don't exist
-if [[ -e "$texts_dir" ]] && [[ -e "$images_dir" ]] && [[ -e "$special_dir" ]]; then
+if [[ ! -e "$texts_dir" ]] && [[ ! -e "$images_dir" ]] && [[ ! -e "$special_dir" ]]; then
 	mkdir -p "$images_dir" "$texts_dir" "$binaries_dir" "$audio_dir" "$special_dir"
 fi
 
-
+# receives a directory as parameter and organizes the files in directories
 organize_files() {
-
-	for file in $(cd "$1"; ls); do
+	cd "$1"
+	IFS=$'\n'
+	for file in $(ls); do
 
 		[[ -d "$file" ]] && continue # if it is a directory, ignores
 
@@ -58,12 +59,12 @@ organize_files() {
 				;;
 			esac
 		done
+		unset IFS
 	}
 
 
 count_of_scans='1'
 while true; do
-	 rename "s/ /_/g" "$download_dir/*.*" # rename every file to avoid conflits with white space
 	organize_files "$download_dir"
 	echo ""
 	echo "Downloads scan number ${count_of_scans}"
