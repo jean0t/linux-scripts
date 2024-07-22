@@ -4,7 +4,7 @@
 #	Downloads youtube audio
 #	created by: Jean0t
 #	github: github.com/jean0t
-#	version: 1.0
+#	version: 1.2
 #============================================|
 #	Changelog
 #
@@ -15,7 +15,15 @@
 #	1.1:
 #		- Test if there are links
 #		  to download
+#
+#	1.2:
+#		- Test if the link passed is
+#		  a valid youtube link
 #============================================|
+# INFORMATION ABOUT THE SOFTWARE
+
+version='1.2'
+[[ "$1" = "-v" || "$1" == "--version" ]] && { echo -e "Version \E[1;34m${version}\E[0m" ; exit 0 ; }
 
 #============================================|
 # VERIFICATIONS
@@ -36,21 +44,23 @@
 # test if there are parameters
 [[ $# -eq 0 ]] && { echo 'you need to pass an youtube link to download' ; exit 1 ; }
 
+# test if the link is valid
+youtube_regex='^(https?\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$'
+[[ $1 =~ $youtube_regex ]] || { echo 'It is not a valid link, please provide a https://youtube.com/...' ; exit 1 ; }
+
 #============================================|
 # GLOBAL VARIABLES
-version='1.0'
-quality='128k' #supports 64k, 128k, 256k, 320k
-format='mp3' #supports best, aac, vorbis, m4a, opus, wav
 output_directory="$HOME/Downloads/Youtube_Download/%(title)s.%(ext)s"
 #============================================|
 
 #	START THE PROGRAM
 
 echo 'Starting the download...'
-if [[ $( yt-dlp -x -f bestaudio -o "$output_directory" --embed-thumbnail "$@" ) ]]; then
-	echo 'Download was successful'
+if [[ $( yt-dlp -x -f bestaudio -o "$output_directory" --embed-thumbnail "$@" >&- 2>&- ) ]]; then
+	echo 'Download was successful, saved in:'
+	echo "$HOME/Downloads/Youtube_Download"
 	exit 0
 else
-	echo 'An error has occurred'
+	echo $'\E[31;1mAn error has occurred\E[0m'
 	exit 1
 fi
