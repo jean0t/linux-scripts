@@ -15,8 +15,8 @@ special_dir="$download_dir/special"
 
 
 # creates the directories if they don't exist
-if [[ ! -e "$texts_dir" ]] && [[ ! -e "$images_dir" ]] && [[ ! -e "$special_dir" ]]; then
-	mkdir -p "$images_dir" "$texts_dir" "$binaries_dir" "$audio_dir" "$special_dir"
+if [[ ! -e "$texts_dir" && ! -e "$images_dir" && ! -e "$special_dir" && ! -e "$videos_dir" && ! -e "$audio_dir" && ! -e "$binaries_dir" ]]; then
+	mkdir -p "$images_dir" "$texts_dir" "$binaries_dir" "$audio_dir" "$special_dir" "$videos_dir"
 fi
 
 # receives a directory as parameter and organizes the files in directories
