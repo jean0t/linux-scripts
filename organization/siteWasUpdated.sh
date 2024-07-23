@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 read -p "Website: " URL
 OLD_CHECKSUM=$(curl -s "$URL" | md5sum | cut -d ' ' -f1)
