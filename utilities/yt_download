@@ -56,11 +56,11 @@ output_directory="$HOME/Downloads/Youtube_Download/%(title)s.%(ext)s"
 #	START THE PROGRAM
 
 echo 'Starting the download...'
-if [[ $( yt-dlp -x -f bestaudio -o "$output_directory" --embed-thumbnail "$@" >&- 2>&- ) ]]; then
+if yt-dlp -x -f bestaudio -o "$output_directory" --embed-thumbnail "$@" >&- 2>&- ; then
 	echo 'Download was successful, saved in:'
 	echo "$HOME/Downloads/Youtube_Download"
 	exit 0
 else
-	echo $'\E[31;1mAn error has occurred\E[0m'
+	echo $'\E[31;1mAn error has occurred\E[0m\nDo you have the python module Mutagen?'
 	exit 1
 fi
