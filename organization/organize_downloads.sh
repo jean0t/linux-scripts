@@ -1,5 +1,25 @@
 #!/usr/bin/env bash
 
+################################################# HEADER
+#
+#	Organize downloads
+#	description: separates the files according
+#	to the extension to a better Downloads
+#	folder
+#
+#
+#	Creator: Joao Mauricio
+#	github: github.com/jean0t
+#
+################################################# INFO
+#
+#	Compatibility OK
+#	Tested in Bash and Zsh
+#
+#
+#
+################################################# CONFIGURATIONS
+
 # This script scans your downloads directory to see if there is any new file
 # if there is, it will move to the correspondent directory, be it audios, videos or anything else
 
@@ -14,15 +34,19 @@ videos_dir="$download_dir/videos"
 special_dir="$download_dir/special"
 
 
+################################################# VERIFICATION
+
 # creates the directories if they don't exist
 if [[ ! -e "$texts_dir" && ! -e "$images_dir" && ! -e "$special_dir" && ! -e "$videos_dir" && ! -e "$audio_dir" && ! -e "$binaries_dir" ]]; then
 	mkdir -p "$images_dir" "$texts_dir" "$binaries_dir" "$audio_dir" "$special_dir" "$videos_dir"
 fi
 
+################################################# FUNCTION
+
 # receives a directory as parameter and organizes the files in directories
 organize_files() {
 	cd "$1"
-	IFS=$'\n'
+	IFS=$'\n' # Necessary to separate the file correctly
 	for file in $(ls); do
 
 		[[ -d "$file" ]] && continue # if it is a directory, ignores
@@ -62,6 +86,8 @@ organize_files() {
 		unset IFS
 	}
 
+
+################################################# START
 
 count_of_scans='1'
 while true; do
