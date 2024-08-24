@@ -41,6 +41,9 @@ if [[ ! -e "$texts_dir" && ! -e "$images_dir" && ! -e "$special_dir" && ! -e "$v
 	mkdir -p "$images_dir" "$texts_dir" "$binaries_dir" "$audio_dir" "$special_dir" "$videos_dir"
 fi
 
+# if the user leaves with Ctrl+C it wont release an Error
+trap 'exit 0' SIGINT
+
 ################################################# FUNCTION
 
 # receives a directory as parameter and organizes the files in directories
