@@ -92,11 +92,4 @@ organize_files() {
 
 ################################################# START
 
-count_of_scans='1'
-while true; do
-	organize_files "$download_dir"
-	echo ""
-	echo "Downloads scan number ${count_of_scans}"
-	let count_of_scans++	
-	sleep 600 # scans the download directory each 10 minutes
-done
+organize_files "$download_dir"

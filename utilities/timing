@@ -2,7 +2,7 @@
 
 read -p 'How many minutes you want to work? ' TIME
 MESSAGE="your period of work ended, take some time to rest"
-AUDIO="$HOME/Downloads/audio/ara-ara.wav"
+AUDIO="" # put the path to the audio file you want
 MINUTES=$(( TIME * 60 ))
 
 wait_time () {
@@ -29,4 +29,4 @@ work_time () {
 	done
 }
 
-work_time && notify_end && play_audio
+work_time && notify_end && [ -n "$AUDIO" ] && play_audio

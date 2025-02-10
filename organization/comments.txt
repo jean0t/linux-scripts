@@ -1,7 +1,0 @@
-this archive is intended to answer the following question:
-What use these scripts have?
-
-
-- These scripts were created with organization in mind. I wanted to organize my directories, but if I tried to do it by hand I usually laxed at some point and everything became bloated a few time later.
-
-If it is useful for you, feel free to use it or take it as a base to add your own modifications for it to be of better use to you.

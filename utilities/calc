@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-
-# accepts mathematical inputs and returns the results
-bc <<<"scale=2;${*}"

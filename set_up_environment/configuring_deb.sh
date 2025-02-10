@@ -67,6 +67,8 @@ else
 	if $( sudo $pkgman install ufw -y ); then
 		echo 'firewall installed successful'
 		sudo ufw enable
+		sudo ufw default deny incoming
+		sudo ufw reload
 		sudo systemctl enable ufw
 		echo 'firewall activated'
 	else

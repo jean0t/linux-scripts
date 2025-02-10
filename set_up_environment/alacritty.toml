@@ -11,5 +11,4 @@ background = "#000000"
 [window]
 title = "jean0t terminal"
 dynamic_title = true
-decorations = "Transparent"
 opacity = 0.8
