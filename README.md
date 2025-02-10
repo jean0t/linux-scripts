@@ -1,23 +1,25 @@
-# Linux Scripts stand for practicity
+# Linux Scripts
 
-## Here you will find
-- [x] configuration scripts for an after installation of a linux system
-- [x] organizational scripts for your environment
-- [x] automation scripts
+A collection of useful scripts to configure the environment, manage utilities, and organize the system.
 
-## What is this repository?
- Here I will be saving my personal scripts for automation, may it be simple configuration of environment or automation of tasks.
- I will be producing more when needed in my personal use or when asked for in the 'issues' option in this repository.
+## Features
+- Scripts for environment setup
+- Utility scripts for daily tasks
+- Tools to improve system organization
 
-## How to use/install these scripts?
-To use these scripts you are needed 1 basic thing, so basic that it comes pre installed in... linux systems.
-for macOS or windows, you will need to install Bash.
-To use these scripts just clone the repository:
+## Usage
+1. Choose your script
+2. Make the script executable:
+```sh
+chmod +x <script>
 ```
-git clone git@github.com:jean0t/linux-scripts.git
-```
-copy the scripts to a directory or add it in a new directory and add it to your variable PATH.
-Don't forget to add executable permissions to them.
-```
-chmod +x <name of the file>
-```
+3. (optional) Make the script avaiable to your PATH variable, so you can call it anytime you need.
+
+## Contributions
+Contributions are welcome! Feel free to submit pull requests with improvements or new scripts.
+
+## License
+This project is licensed under the GPL-3.0 License.
+
+## About
+The goal of this project is to provide a set of useful scripts based on my daily usage and the experience of others.
