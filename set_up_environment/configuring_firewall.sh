@@ -47,47 +47,47 @@ PS3='Select a Service> '
 select SERVICE in qBittorrent ssh smtp imap pop3 nfs www xmpp telnet discord exit; do
   case $REPLY in
     1)
-      ufw allow qBittorrent
+      ufw allow out qBittorrent
       ufw reload
     ;;
 
     2)
-      ufw allow ssh
+      ufw allow out ssh
       ufw reload
     ;;
 
     3)
-      ufw allow smtp
+      ufw allow out smtp
       ufw reload
     ;;
 
     4)
-      ufw allow imap
+      ufw allow out imap
       ufw reload
     ;;
 
     5)
-      ufw allow pop3
+      ufw allow out pop3
       ufw reload
     ;;
 
     6)
-      ufw allow nfs
+      ufw allow out nfs
       ufw reload
     ;;
     
     7)
-      ufw allow www
+      ufw allow out www
       ufw reload
     ;;
 
     8)
-      ufw allow xmpp
+      ufw allow out xmpp
       ufw reload
     ;;
 
     9)
-      ufw allow telnet
+      ufw allow out telnet
       ufw reload
     ;;
 
