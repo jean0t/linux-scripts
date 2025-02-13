@@ -44,45 +44,60 @@ read confirmation
 [ "$confirmation" = "y" -o "$confirmation" = "Y" ] || { echo "Configuration completed." ; exit 0 ; }
 # Choose the services that the user wants
 PS3='Select a Service> '
-select SERVICE in qBittorrent ssh smtp imap pop3 nfs www xmpp telnet exit; do
+select SERVICE in qBittorrent ssh smtp imap pop3 nfs www xmpp telnet discord exit; do
   case $REPLY in
     1)
       ufw allow qBittorrent
+      ufw reload
     ;;
 
     2)
       ufw allow ssh
+      ufw reload
     ;;
 
     3)
       ufw allow smtp
+      ufw reload
     ;;
 
     4)
       ufw allow imap
+      ufw reload
     ;;
 
     5)
       ufw allow pop3
+      ufw reload
     ;;
 
     6)
       ufw allow nfs
+      ufw reload
     ;;
     
     7)
       ufw allow www
+      ufw reload
     ;;
 
     8)
       ufw allow xmpp
+      ufw reload
     ;;
 
     9)
       ufw allow telnet
+      ufw reload
     ;;
 
     10)
+      ufw allow out 50000:65000/udp
+      ufw allow out 3478/udp
+      ufw reload
+    ;;
+
+    11)
       exit
     ;;
 done
