@@ -44,9 +44,9 @@ VERSION='1.1'
 ########################################################## START
 
 # Must be root to work with filesystem
-[ $UID -ne 0 ] && exit 1
-
-case "$1" in
+# if it is an essential command it will not
+# work without root permissions
+case "${1-:-h}" in
   
   -v|--version)
     echo "Version $VERSION"
@@ -54,6 +54,7 @@ case "$1" in
 
   # Two blocks depending on the option used if by UUID or LABEL
  -u|--uuid)
+    [ $UID -ne 0 ] && exit 1
     DIRECTORY="$HOME/$UUID"
     findfs UUID="${UUID}" 1>/dev/null 2>&1 || exit 1
     mkdir -p "$DIRECTORY"
@@ -62,6 +63,7 @@ case "$1" in
 
   
   -l|--label)
+    [ $UID -ne 0 ] && exit 1
     DIRECTORY="$HOME/$LABEL"
     findfs LABEL=${LABEL} 1>/dev/null 2>&1 || exit 1
     mkdir -p "$DIRECTORY"
@@ -70,8 +72,7 @@ case "$1" in
 
   
   *)  
-  echo '
-  Usage: ./mount_device.sh [OPTIONS]
+  echo 'Usage: ./mount_device.sh [OPTIONS]
 
   OPTIONS:
     -v | --version  get the version of the script
@@ -84,13 +85,12 @@ case "$1" in
     lsblk -o name,uuid,label,size
 
     after that you select or the label or the uuid,
-    both are used to recognize the device
+    both are used to recognize the device.
 
     Open the script and then set the UUID or LABEL
     variable with the device you want.
 
-    The device will be mounted in the home of the user.
-  '
+    The device will be mounted in the home of the user.'
   ;;
 
 esac
