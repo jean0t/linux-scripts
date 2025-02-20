@@ -15,6 +15,12 @@ chmod +x <script>
 ```
 3. (optional) Make the script avaiable to your PATH variable, so you can call it anytime you need.
 
+## SCRIPTS 
+The names are self explanatory
+- set_up_environment -> configuring_firewall.sh + config files to text editors (vim, nano) + config file to alacritty
+- organization -> organize_downloads.sh and .py
+- utilities -> timing.sh (cronometer) + mount_device.sh (mount device automatically) + desktop_entry_creator.sh
+
 ## Contributions
 Contributions are welcome! Feel free to submit pull requests with improvements or new scripts.
 
