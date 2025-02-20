@@ -111,4 +111,4 @@ NAMEFILE="$(echo "$NAME" | tr A-Z a-z | tr ' ' _)"
 
 # If there is some mysterious error here the variables expansion
 # will take of of it to avoid rewritting some important file
-echo "$TEMPLATE" > ${OUTPUTDIR-:/nothing}/"${NAMEFILE-:nothing}.desktop"
+echo "$TEMPLATE" > ${OUTPUTDIR:-/nothing}/"${NAMEFILE:-nothing}.desktop"
