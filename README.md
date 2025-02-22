@@ -17,7 +17,7 @@ chmod +x <script>
 
 ## SCRIPTS 
 The names are self explanatory
-- set_up_environment -> configuring_firewall.sh + config files to text editors (vim, nano) + config file to alacritty
+- set_up_environment -> configuring_firewall.sh + config files to text editors (vim, nano) + config file to alacritty + set_up_git.sh
 - organization -> organize_downloads.sh and .py
 - utilities -> timing.sh (cronometer) + mount_device.sh (mount device automatically) + desktop_entry_creator.sh
 
