@@ -86,9 +86,9 @@ Default directory: $HOME/.local/share/applications'
     esac
 done
 
-[ -z $NAME ] && exit 1
-[ -z $ICON ] && exit 1
-[ -z $EXEC ] && exit 1
+[ -z "$NAME" ] && exit 1
+[ -z "$ICON" ] && exit 1
+[ -z "$EXEC" ] && exit 1
 
 ########################################################### VARIABLES
 TEMPLATE="[Desktop Entry]
