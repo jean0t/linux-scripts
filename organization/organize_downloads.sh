@@ -1,4 +1,10 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
+
+
+# DISCLAIMER:
+# Usually it wont change much since sh is a link to bash
+# in a lot of distributions, but you can change it to dash
+# which will improve its speed and lower the overhead
 
 ################################################# HEADER
 #
@@ -11,11 +17,15 @@
 #	Creator: Joao Mauricio
 #	github: github.com/jean0t
 #
+#   Last update: 24-02-2025
+#
 ################################################# INFO
 #
-#	Compatibility OK
-#	Tested in Bash and Zsh
+#	Compatibility POSIX
 #
+#	Tested Dash and Korn shell
+#	(also bash and zsh, but they are guaranteed
+#	to work if dash can run it anyway)
 #
 #
 ################################################# CONFIGURATIONS
@@ -36,59 +46,69 @@ special_dir="$download_dir/special"
 
 ################################################# VERIFICATION
 
-# creates the directories if they don't exist
-if [[ ! -e "$texts_dir" && ! -e "$images_dir" && ! -e "$special_dir" && ! -e "$videos_dir" && ! -e "$audio_dir" && ! -e "$binaries_dir" ]]; then
-	mkdir -p "$images_dir" "$texts_dir" "$binaries_dir" "$audio_dir" "$special_dir" "$videos_dir"
-fi
 
 # if the user leaves with Ctrl+C it wont release an Error
-trap 'exit 0' SIGINT
+trap 'exit 0' INT
+
+
+# creates the directories if it don't exist
+for dir in "$images_dir" "$texts_dir" "$binaries_dir" "$audio_dir" "$special_dir" "$videos_dir"
+do
+    if test ! -e "$dir"
+    then
+        mkdir -p "$dir"
+    fi
+done
 
 ################################################# FUNCTION
 
+
 # receives a directory as parameter and organizes the files in directories
 organize_files() {
-	cd "$1"
-	IFS=$'\n' # Necessary to separate the file correctly
-	for file in $(ls); do
 
-		[[ -d "$file" ]] && continue # if it is a directory, ignores
+    # Leaves if something unexpected happen with cd
+    # it won't happen, but you never know :P
+	cd "$1" || exit 1 
+	IFS='
+'
+	for file in *; do
 
-			case "$(file --mime-type -b "$file")" in
+		[ -d "$file" ] && continue # if it is a directory, ignores
+
+        case "$(file --mime-type -b "$file")" in
 				image/*)
-					mv "$file" -t "$images_dir"
+					mv "$file" "$images_dir"
 					echo "$file moved to $images_dir"
 				;;
 
 				text/*)
-					mv "$file" -t "$texts_dir"
+					mv "$file" "$texts_dir"
 					echo "$file moved to $texts_dir"
 				;;
 
 				audio/*)
-					mv "$file" -t "$audio_dir"
+					mv "$file" "$audio_dir"
 					echo "$file moved to $audio_dir"
 				;;
 
 				application/*)
-					mv "$file" -t "$binaries_dir"
+					mv "$file" "$binaries_dir"
 					echo "$file moved to $binaries_dir"
 				;;
 
 				video/*)
-					mv "$file" -t "$videos_dir"
+					mv "$file" "$videos_dir"
 					echo "$file moved to $videos_dir"
 				;;
 
 				*)
-					mv "$file" -t "$special_dir"
+					mv "$file" "$special_dir"
 					echo "$file moved to $special_dir"
 				;;
 			esac
 		done
 		unset IFS
 	}
-
 
 ################################################# START
 
