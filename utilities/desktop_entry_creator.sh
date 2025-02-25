@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 ########################################################### HEADER
 #
@@ -14,8 +14,11 @@
 #   1.0 :
 #       script created, supports 1 executable each time
 #       command line usage
+#
+#   2.0 :
+#       POSIX compliant
 ###########################################################
-VERSION='1.0'
+VERSION='2.0'
 
 
 ########################################################### INFO
@@ -92,18 +95,18 @@ done
 
 ########################################################### VARIABLES
 TEMPLATE="[Desktop Entry]
-Name="$NAME"
+Name=$NAME
 Type=Application
-GenericName="$GENERICNAME"
-Comment="$DESCRIPTION"
-Icon="$ICON"
-Exec="$EXEC"
+GenericName=$GENERICNAME
+Comment=$DESCRIPTION
+Icon=$ICON
+Exec=$EXEC
 "
 
 OUTPUTDIR="$HOME/.local/share/applications"
 
 # name treated to have only lowercase letters and no spaces
-NAMEFILE="$(echo "$NAME" | tr A-Z a-z | tr ' ' _)"
+NAMEFILE="$(echo "$NAME" | tr '[:upper]' '[:lower:]' | tr ' ' _)"
 ###########################################################
 
 
@@ -111,4 +114,4 @@ NAMEFILE="$(echo "$NAME" | tr A-Z a-z | tr ' ' _)"
 
 # If there is some mysterious error here the variables expansion
 # will take of of it to avoid rewritting some important file
-echo "$TEMPLATE" > ${OUTPUTDIR:-/nothing}/"${NAMEFILE:-nothing}.desktop"
+echo "$TEMPLATE" > "${OUTPUTDIR:-/nothing}"/"${NAMEFILE:-nothing}.desktop"
