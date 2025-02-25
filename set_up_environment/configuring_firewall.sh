@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 ################################################################################################### HEADER
 #
@@ -9,23 +9,31 @@
 #
 ###################################################################################################
 
-################################################################################################### VERIFICATIONS
-[ $UID -eq 0 ] || { echo 'you must be root to configure the firewall.' ; exit 1 ; }
 
-$(command -v ufw 1>/dev/null 2>&1) || { echo 'you must have ufw installed in your system.' ; exit 1 ; } 
+################################################################################################### VERIFICATIONS
+
+[ "$(id -u)" -eq 0 ] || { echo 'you must be root to configure the firewall.' ; exit 1 ; }
+
+(command -v ufw 1>/dev/null 2>&1) || { echo 'you must have ufw installed in your system.' ; exit 1 ; } 
 
 ###################################################################################################
 
 
 
 ################################################################################################### START
+
+
 # enables ufw service if it isn't running yet
 systemctl is-active --quiet ufw || ufw enable  && systemctl enable ufw
+
+
 
 # First configuration is to Deny every Incoming and Outcoming
 # isolating the computer from the network
 (ufw status verbose | grep -q "deny (incoming)") || ufw default deny incoming
 (ufw status verbose | grep -q "deny (outgoing)") || ufw default deny outcoming
+
+
 
 # Now we will set up rules and allowing ports one by one
 # The internet conection ports will be set up automatically 
@@ -35,69 +43,79 @@ systemctl is-active --quiet ufw || ufw enable  && systemctl enable ufw
 (ufw status verbose | grep -qw 443)   || ufw allow out https
 (ufw status verbose | grep -qw 5353)  || ufw allow out mdns
 
+
+
 # Now we will confirm the rules before advancing to other options
 # usually that will be the basic and needed for most
 ufw reload 1>/dev/null
 
+
+
 printf "%s "  "The firewall is active and your network is secure. Do you want to allow custom services? [y/N] " 
 read confirmation
-[ "$confirmation" = "y" -o "$confirmation" = "Y" ] || { echo "Configuration completed." ; exit 0 ; }
+[ "${confirmation}" = "y" ] || [ "${confirmation}" = "Y" ] || { echo "Configuration completed." ; exit 0 ; }
+
+
+
+# This will fail in posix shells
 # Choose the services that the user wants
 PS3='Select a Service> '
-select SERVICE in qBittorrent ssh smtp imap pop3 nfs www xmpp telnet discord exit; do
+select _ in qBittorrent ssh smtp imap pop3 nfs www xmpp telnet discord exit
+do
   case $REPLY in
-    1)
-      ufw allow out qBittorrent
-      ufw reload
-    ;;
+        1)
+          ufw allow out qBittorrent
+          ufw reload
+        ;;
 
-    2)
-      ufw allow out ssh
-      ufw reload
-    ;;
+        2)
+          ufw allow out ssh
+          ufw reload
+        ;;
 
-    3)
-      ufw allow out smtp
-      ufw reload
-    ;;
+        3)
+          ufw allow out smtp
+          ufw reload
+        ;;
 
-    4)
-      ufw allow out imap
-      ufw reload
-    ;;
+        4)
+          ufw allow out imap
+          ufw reload
+        ;;
 
-    5)
-      ufw allow out pop3
-      ufw reload
-    ;;
+        5)
+          ufw allow out pop3
+          ufw reload
+        ;;
 
-    6)
-      ufw allow out nfs
-      ufw reload
-    ;;
-    
-    7)
-      ufw allow out www
-      ufw reload
-    ;;
+        6)
+          ufw allow out nfs
+          ufw reload
+        ;;
+        
+        7)
+          ufw allow out www
+          ufw reload
+        ;;
 
-    8)
-      ufw allow out xmpp
-      ufw reload
-    ;;
+        8)
+          ufw allow out xmpp
+          ufw reload
+        ;;
 
-    9)
-      ufw allow out telnet
-      ufw reload
-    ;;
+        9)
+          ufw allow out telnet
+          ufw reload
+        ;;
 
-    10)
-      ufw allow out 50000:65000/udp
-      ufw allow out 3478/udp
-      ufw reload
-    ;;
+        10)
+          ufw allow out 50000:65000/udp
+          ufw allow out 3478/udp
+          ufw reload
+        ;;
 
-    11)
-      exit
-    ;;
+        11)
+          exit
+        ;;
+    esac
 done
