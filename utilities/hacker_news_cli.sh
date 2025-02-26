@@ -15,12 +15,16 @@
 #       Script created
 #
 #
+#   1.2:
+#       fix: crontab is now functional
+#
+#
 #=====================================================|
 
 
 #=====================================================| GLOBAL VARIABLES
 
-VERSION='1.0'
+VERSION='1.1'
 
 WEBSITE="https://news.ycombinator.com/"
 
@@ -110,9 +114,10 @@ case "$1" in
 
     -c|--crontab)
         systemctl list-units --type=service | grep -q crond.service || error_msg "Cron is not running." 
+        [ -z "$2" ] && error_msg "Provide a path."
         [ -e $(realpath "$2") ] || error_msg "Provide a valid path to the script."
 
-        crontab -l 2>/dev/null | grep -qF "$CRONJOB $(realpath ${2}) -r" || echo "CRONJOB $(realpath ${2}) -r" | crontab -
+        crontab -l 2>/dev/null | grep -qF "$CRONJOB $(realpath ${2}) -with -r" || echo "$(crontab -l)\n$CRONJOB $(realpath ${2}) -r" | crontab -
         msg "Cronjob added! Now your cache will keep refreshing each 5 minutes."
 
     ;;
