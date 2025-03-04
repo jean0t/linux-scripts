@@ -16,7 +16,7 @@ while true
 do
     printf "%s" "> "
     read PROMPT
-    if [ "$PROMPT" = "exit" ] || ["$PROMPT" = "q"]
+    if [ "$PROMPT" = "exit" ] || [ "$PROMPT" = "q"]
     then
 	break
     fi
