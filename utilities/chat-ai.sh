@@ -10,13 +10,15 @@
 
 
 #========================================================| START
-MODEL='$(ollama list | tail -n 1 | tr -s " " | cut -d " " -f 1)'
+trap exit INT
+
+MODEL=$(ollama list | tail -n 1 | tr -s " " | cut -d " " -f 1)
 
 while true
 do
     printf "%s" "> "
     read PROMPT
-    if [ "$PROMPT" = "exit" ] || [ "$PROMPT" = "q"]
+    if [ "$PROMPT" = "exit" ] || [ "$PROMPT" = "q" ]
     then
 	break
     fi
