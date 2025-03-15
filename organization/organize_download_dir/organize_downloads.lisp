@@ -34,8 +34,9 @@ exec sbcl \
     (string-downcase (pathname-type (parse-namestring file)))
     nil))
 
-(defun organize-download-dir () ())
+
+(defun organize-download-dir (directory) ())
 
 
 ;; MAIN
-(organize-download-dir)
+(organize-download-dir *downloads-directory*)
