@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
 
-# unfortunatelly you must be root to do any action in /etc
-[ "$UID" -ne 0 ] && { printf "%s\n" "You must be root to run this script" ; exit 1 ; }
-
-
 # path to the file in the home directory of the user
 USER_FILE="$HOME/.inputrc"
 
