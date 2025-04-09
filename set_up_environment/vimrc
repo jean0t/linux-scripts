@@ -1,8 +1,5 @@
-" [...]
-set background=dark
-" [...]
-
 syntax on
+colorscheme evening
 
 set autoindent
 set expandtab
