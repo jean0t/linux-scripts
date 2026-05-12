@@ -106,7 +106,7 @@ Exec=$EXEC
 OUTPUTDIR="$HOME/.local/share/applications"
 
 # name treated to have only lowercase letters and no spaces
-NAMEFILE="$(echo "$NAME" | tr '[:upper]' '[:lower:]' | tr ' ' _)"
+NAMEFILE="$(echo "$NAME" | tr '[:upper:]' '[:lower:]' | tr ' ' _)"
 ###########################################################
 
 
